@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Get RockFM Songs",
+  "description": "This extension allows to easily search for the current RockFM song.",
+  "version": "1.0",
+
+  "permissions": [
+    "http://player.rockfm.fm/",
+    "http://www.sonicomp3.com/"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}
