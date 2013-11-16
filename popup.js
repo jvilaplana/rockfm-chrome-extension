@@ -1,16 +1,8 @@
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
+// Copyright (c) 2013 Jordi Vilaplana.
+// Use of this source code is governed by a license that can be
 // found in the LICENSE file.
 
-/**
- * Global variable containing the query we'd like to pass to Flickr. In this
- * case, kittens!
- *
- * @type {string}
- */
-var query = 'kittens';
-
-var kittenGenerator = {
+var rockFM = {
   /**
    * RockFM URL that will give us the current song playing.
    *
@@ -18,18 +10,17 @@ var kittenGenerator = {
    * @private
    */
   searchOnRockFM_: 'http://player.rockfm.fm/rdsrock.php',
-  searchOnSonicmp3_: 'http://www.sonicomp3.com/music/' + encodeURIComponent(query) + '.html',
 
   /**
-   * Sends an XHR GET request to grab photos of lots and lots of kittens. The
-   * XHR's 'onload' event is hooks up to the 'showPhotos_' method.
+   * Sends an XHR GET request to get the current song from RockFM radio station. The
+   * XHR's 'onload' event hooks up to the 'getSong_' method.
    *
    * @public
    */
-  requestKittens: function() {
+  getCurrentSong: function() {
     var req = new XMLHttpRequest();
     req.open("GET", this.searchOnRockFM_, true);
-    req.onload = this.showPhotos_.bind(this);
+    req.onload = this.getSong_.bind(this);
     req.send(null);
   },
   requestSonicmp3: function(query) {
@@ -37,7 +28,7 @@ var kittenGenerator = {
     var searchon = 'http://www.sonicomp3.com/music/' + encodeURIComponent(query) + '.html';
     document.body.appendChild(document.createTextNode(searchon));
     req.open("GET", searchon, true);
-    req.onload = this.showPhotos2_.bind(this);
+    req.onload = this.getSonicmp3_.bind(this);
     req.send(null);
   },
 
@@ -49,12 +40,11 @@ var kittenGenerator = {
    * @param {ProgressEvent} e The XHR ProgressEvent.
    * @private
    */
-  showPhotos_: function (e) {
+  getSong_: function (e) {
     var currentSong = e.target.response;
     currentSong = currentSong.split("@")[0];
     currentSong = currentSong.replace(/:/g, "");
     currentSong = currentSong.replace(/"/g, '');
-    window.query = currentSong;
 
     var prova = document.createElement('div');
     if(currentSong.indexOf("RockFM") == -1) {
@@ -65,37 +55,23 @@ var kittenGenerator = {
       link.setAttribute('target', '_blank');
 
       prova.appendChild(link);
-      document.body.appendChild(prova);
+      document.getElementById('currentlyPlaying').appendChild(link);
     }
     else {
-      document.body.appendChild(document.createTextNode("No Song - " + currentSong))
+      var noSong = document.createElement('span');
+      noSong.appendChild(document.createTextNode("No Song - " + currentSong));
+      document.getElementById('currentlyPlaying').appendChild(noSong);
     }
   },
 
-  showPhotos2_: function (e) {
+  getSonicmp3_: function (e) {
     document.body.appendChild(document.createTextNode(e.target.response));
     var results = e.target.responseXML.getElementById('table-result');
     document.body.appendChild(results);
-  },
-
-  /**
-   * Given a photo, construct a URL using the method outlined at
-   * http://www.flickr.com/services/api/misc.urlKittenl
-   *
-   * @param {DOMElement} A kitten.
-   * @return {string} The kitten's URL.
-   * @private
-   */
-  constructKittenURL_: function (photo) {
-    return "http://farm" + photo.getAttribute("farm") +
-        ".static.flickr.com/" + photo.getAttribute("server") +
-        "/" + photo.getAttribute("id") +
-        "_" + photo.getAttribute("secret") +
-        "_s.jpg";
   }
 };
 
 // Run our kitten generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-  kittenGenerator.requestKittens();
+  rockFM.getCurrentSong();
 });

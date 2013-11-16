@@ -2,17 +2,20 @@
 <html>
   <head>
     <title>Get RockFM Songs</title>
-    <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="popup.js"></script>
   </head>
   <body>
-    <a href="http://player.rockfm.fm/" target="_blank">Open RockFM player</a>
+    <h1>Get RockFM Songs</h1>
+    <div class="rockfmplayer">
+      <span class="rockfmplayerlink">
+        <a href="http://player.rockfm.fm/" target="_blank">Open RockFM player</a>
+      </span>
+    </div>
     <hr />
-    <p>Currently playing...</p>
+    <div id="currentlyPlaying" class="currentlyPlaying">
+      <span>Currently playing...</span>
+    </div>
   </body>
 </html>

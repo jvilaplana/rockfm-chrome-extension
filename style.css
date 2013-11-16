@@ -1,0 +1,48 @@
+body {
+    min-width: 357px;
+    overflow-x: hidden;
+    font-family: Ubuntu, sans-serif;
+    padding: 5px;
+}
+
+h1 {
+    text-align: center;
+    background-color: #F7F2E0;
+    border: 1px dashed grey;
+    padding: 5px;
+    font-size: 16px;
+    margin: 0px 0px 10px 0px;
+}
+
+a {
+    text-decoration: none;
+    text-shadow: 0 0 2px #999;
+    color: #ed490a;
+}
+
+
+.rockfmplayer {
+    background-image: url('/img/rockfm.png');
+    background-repeat: no-repeat;
+    height: 50px;
+
+}
+
+.rockfmplayerlink {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 60px;
+    padding-top: 13px;
+}
+
+.currentlyPlaying {
+    background-image: url('/img/playing01.gif');
+    background-repeat: no-repeat;
+    height: 50px;
+}
+
+.currentlyPlaying span, a {
+    margin-left: 60px;
+    margin-top: 5px;
+    display: block;
+}
