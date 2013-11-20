@@ -48,6 +48,10 @@ var rockFM = {
 
     var prova = document.createElement('div');
     if(currentSong.indexOf("RockFM") == -1) {
+      var currentlyPlaying = document.createElement('span');
+      currentlyPlaying.appendChild(document.createTextNode("Currently playing..."));
+      document.getElementById('currentlyPlaying').appendChild(currentlyPlaying);
+
       var text = document.createTextNode(currentSong);
       var link = document.createElement('a');
       link.appendChild(document.createTextNode(currentSong));
@@ -59,8 +63,11 @@ var rockFM = {
     }
     else {
       var noSong = document.createElement('span');
-      noSong.appendChild(document.createTextNode("No Song - " + currentSong));
+      var noSong2 = document.createElement('span');
+      noSong.appendChild(document.createTextNode("Song information unavailable:"));
+      noSong2.appendChild(document.createTextNode(currentSong));
       document.getElementById('currentlyPlaying').appendChild(noSong);
+      document.getElementById('currentlyPlaying').appendChild(noSong2);
     }
   },
 

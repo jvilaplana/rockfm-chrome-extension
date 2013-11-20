@@ -3,7 +3,7 @@
 
   "name": "Get RockFM Songs",
   "description": "This extension allows to easily search for the current RockFM song.",
-  "version": "1.0",
+  "version": "1.1",
 
   "permissions": [
     "http://player.rockfm.fm/",
